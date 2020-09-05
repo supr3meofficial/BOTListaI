@@ -1,18 +1,14 @@
-import discord
+from discord.ext import commands
 import os
 
-client = discord.Client()
+bot = commands.Bot(command_prefix='.')
 
-@client.event
+@bot.event
 async def on_ready():
-    print('BOT conectado como {0.user}'.format(client))
+    print(f'BOT conectado como {bot.user}')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@bot.command()
+async def teste(ctx):
+    await ctx.send('Parece estar a funcionar.')
 
-    if message.content.startswith('.teste'):
-        await message.channel.send('Parece estar a funcionar.')
-
-client.run(os.environ["BOT_TOKEN"])
+bot.run(os.environ["BOT_TOKEN"])

@@ -10,7 +10,7 @@ async def on_ready():
 # Reage a entradas de membros no servidor
 @bot.event
 async def on_member_join(member):
-    # Canal das bem-vindas definido como o canal de sistema
+    # Canal das boas-vindas definido como o canal de sistema
     channel = member.guild.system_channel
     print("Something at least happened")
     if channel is not None:

@@ -6,3 +6,9 @@ class Geral(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command()
+    async def teste(self, ctx):
+        await ctx.send('Parece estar a funcionar.')
+
+def setup(bot):
+	bot.add_cog(Geral(bot))

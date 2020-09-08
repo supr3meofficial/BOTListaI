@@ -16,9 +16,6 @@ async def on_member_join(member):
     if channel is not None:
         await channel.send(f'Bem-vindo/a à família, {member.mention}. :purple_heart:')
 
-@bot.command()
-async def teste(ctx):
-    await ctx.send('Parece estar a funcionar.')
-
+bot.load_extension('cogs.geral')
 
 bot.run(os.environ["BOT_TOKEN"])

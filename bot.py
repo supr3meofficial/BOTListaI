@@ -1,8 +1,10 @@
 from discord.ext import commands
 import os
+import config
 
 bot = commands.Bot(command_prefix='.')
 
+# Quando o bot se conecta ao discord
 @bot.event
 async def on_ready():
     print(f'BOT conectado como {bot.user}')
@@ -16,6 +18,12 @@ async def on_member_join(member):
     if channel is not None:
         await channel.send(f'Bem-vindo/a à família, {member.mention}. :purple_heart:')
 
-bot.load_extension('cogs.geral')
+extensions = ['cogs.geral',
+              'cogs.torneio']
 
-bot.run(os.environ["BOT_TOKEN"])
+for ext in extensions:
+    bot.load_extension(ext)
+
+
+bot.run(config.BOT_TOKEN)
+# bot.run(os.environ["BOT_TOKEN"])

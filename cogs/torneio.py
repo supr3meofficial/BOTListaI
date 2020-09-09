@@ -18,18 +18,19 @@ class Torneio(commands.Cog):
         bot_dm = await dm_channel.send('Envia-me o teu @ do Instagram, para te podermos registar :)')
         # Aguardar pela reposta
         try:
-            reply = await self.bot.wait_for('message', timeout=30, check=lambda reply: reply.author == ctx.author)
+            reply = await self.bot.wait_for('message', timeout=30, check=lambda reply: reply.author == ctx.author and reply.channel == dm_channel)
             # Aguardar pela confirmação
             bot_confirmation_message = await dm_channel.send(f"Confirma se está correto: `{reply.content}`")
             await bot_confirmation_message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
             await bot_confirmation_message.add_reaction('\N{CROSS MARK}')
             # Check para as reações
             def check(reaction, user):
-                return user == ctx.author
+                return user == ctx.author and reaction.message.author.id == self.bot.user.id
             # Aguardar pelas reações
             try:
                 reaction, user = await self.bot.wait_for('reaction_add', timeout=30, check=check)
                 if reaction.emoji == '\N{WHITE HEAVY CHECK MARK}':
+                    await dm_channel.send('Obrigado por te registares. Um moderador irá agora rever o teu registo.')
                     return reply.content
                 else:
                     await self.account_request(ctx)
@@ -49,11 +50,13 @@ class Torneio(commands.Cog):
         if account_name != None:
             # Remover potenciais @ no nome
             account_name = str(account_name).replace('@','')
-            # Editar nickname
-            await ctx.author.edit(nick=account_name)
             # Reportar para o canal admin
             admin_channel = ctx.guild.get_channel(751865819834613902)
-            await admin_channel.send(f'{ctx.author} -> {account_name}')
+            await admin_channel.send(f'**Novo registo:** `{ctx.author}` **->** `{account_name}`')
+            # Adicionar role
+            await ctx.author.add_roles(ctx.guild.get_role(751863492495147176))
+            # Editar nickname
+            await ctx.author.edit(nick=account_name)
             
 def setup(bot):
 	bot.add_cog(Torneio(bot))

@@ -12,7 +12,11 @@ class Torneio(commands.Cog):
     @commands.command()
     @commands.check(check_channel_id)
     async def participar(self, ctx):
+        # Reagir à mensagem
         await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
+        # Enviar DM ao utilizador
+        dm_channel = await ctx.author.create_dm()
+        await dm_channel.send('Envia-me o teu @ do Instagram, para te podermos registar :)')
 
 def setup(bot):
 	bot.add_cog(Torneio(bot))

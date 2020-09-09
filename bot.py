@@ -14,7 +14,6 @@ async def on_ready():
 async def on_member_join(member):
     # Canal das boas-vindas definido como o canal de sistema
     channel = member.guild.system_channel
-    print("Something at least happened")
     if channel is not None:
         await channel.send(f'Bem-vindo/a à família, {member.mention}. :purple_heart:')
 

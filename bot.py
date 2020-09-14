@@ -24,5 +24,5 @@ for ext in extensions:
     bot.load_extension(ext)
 
 
-bot.run(config.BOT_TOKEN)
-# bot.run(os.environ["BOT_TOKEN"])
+# bot.run(config.BOT_TOKEN)
+bot.run(os.environ["BOT_TOKEN"])

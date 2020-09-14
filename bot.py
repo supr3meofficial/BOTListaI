@@ -1,6 +1,6 @@
 from discord.ext import commands
 import os
-import config
+# import config
 
 bot = commands.Bot(command_prefix='.')
 

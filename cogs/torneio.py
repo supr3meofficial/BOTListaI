@@ -57,6 +57,18 @@ class Torneio(commands.Cog):
             await ctx.author.add_roles(ctx.guild.get_role(751863492495147176))
             # Editar nickname
             await ctx.author.edit(nick=account_name)
-            
+
+    @commands.command()
+    async def torneio(self, ctx):
+
+        desc = '''
+:small_blue_diamond: Envia `.participar` para o canal <#751866032133636188> e segue as instruções para te poderes registar.
+
+:eye_in_speech_bubble: Lembra-te que estes canais são destinados exclusivamente aos __participantes__ do torneio. Os participantes devem-se registar com informação verdadeira, nomes de registo indevidos irão ser punidos por um moderador.
+                '''
+
+        embed=discord.Embed(title="Como participar no Torneio de Fornite", url="https://listaieseg.wixsite.com/", description=desc, color=0x933db8)
+        await ctx.send(embed=embed) 
+
 def setup(bot):
-	bot.add_cog(Torneio(bot))
+    bot.add_cog(Torneio(bot))

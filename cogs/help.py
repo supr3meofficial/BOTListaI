@@ -26,6 +26,7 @@ class HelpCog(commands.Cog):
 
 **:small_blue_diamond: Sobre o BOT**
 `.info` Descobre mais sobre mim
+`.help` Mostra esta mensagem
                 '''
 
         await ctx.message.add_reaction("❔")

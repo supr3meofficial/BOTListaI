@@ -1,3 +1,4 @@
+from discord import Game as discordGame
 from discord.ext import commands
 import os
 # import config
@@ -7,6 +8,7 @@ bot = commands.Bot(command_prefix='.')
 # Quando o bot se conecta ao discord
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discordGame("Família I <3"))
     print(f'BOT conectado como {bot.user}')
 
 # Reage a entradas de membros no servidor
@@ -18,7 +20,9 @@ async def on_member_join(member):
         await channel.send(f'Bem-vindo/a à família, {member.mention}. :purple_heart:')
 
 extensions = ['cogs.geral',
-              'cogs.torneio']
+              'cogs.torneio',
+              'cogs.help',
+              'cogs.etc']
 
 for ext in extensions:
     bot.load_extension(ext)

@@ -31,7 +31,7 @@ class Geral(commands.Cog):
             embed = Embed(title="Uh oh!",
             description=msg,
             colour=0xbf0000)
-            embed.set_author(icon_url=member.avatar_url, name=member.mention)
+            embed.set_author(icon_url=member.avatar_url, name=member)
             return await ctx.send(embed=embed, delete_after=15)
 
         share_author = f"{member.name} partilhou a seguinte música:"
@@ -47,7 +47,7 @@ class Geral(commands.Cog):
         embed.add_field(name="Álbum:", value=spotify.album, inline=False)
         embed.add_field(name="Duração:", value=duration, inline=False)
         embed.add_field(name="Link da Faixa:", value=f'https://open.spotify.com/track/{spotify.track_id}', inline=False)
-        embed.set_footer(text=member.name, icon_url=member.avatar_url)
+        embed.set_footer(text=member, icon_url=member.avatar_url)
         # Enviar para o canal de partilhas
         share_channel = ctx.guild.get_channel(756188228448420041)
         await share_channel.send(embed=embed)

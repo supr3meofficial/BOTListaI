@@ -31,7 +31,7 @@ class Geral(commands.Cog):
             embed = Embed(title="Uh oh!",
             description=msg,
             colour=0xbf0000)
-            embed.set_author(icon_url=member.avatar_url, name=member)
+            embed.set_author(icon_url=member.avatar_url, name=member.mention)
             return await ctx.send(embed=embed, delete_after=15)
 
         share_author = f"{member.name} partilhou a seguinte música:"

@@ -73,7 +73,7 @@ Estão lá por algum motivo.
 **7 ❱ ‎ ‎Segue os Termos e Condições do Discord.**
 Estão anexados em baixo.
 
-> Os moderadores deste discord reservam o direito de agir conforme achem correto sem aviso prévio.
+> Os moderadores deste discord reservam o direito de agir conforme acharem correto sem aviso prévio.
 > Para apelar um ban contacta o <@203299786382639104>
 """
         await ctx.message.delete()

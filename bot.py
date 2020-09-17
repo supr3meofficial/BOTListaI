@@ -1,4 +1,4 @@
-from discord import Game as discordGame
+from discord import Game, Forbidden
 from discord.ext import commands
 import os
 # import config
@@ -8,7 +8,7 @@ bot = commands.Bot(command_prefix='.')
 # Quando o bot se conecta ao discord
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discordGame("Família I <3"))
+    await bot.change_presence(activity=Game("Família I <3"))
     print(f'BOT conectado como {bot.user}')
 
 # Reage a entradas de membros no servidor
@@ -18,6 +18,26 @@ async def on_member_join(member):
     channel = member.guild.system_channel
     if channel is not None:
         await channel.send(f'Bem-vindo/a à família, {member.mention}. :purple_heart:')
+
+@bot.event
+async def on_command_error(ctx, error):
+    # Permitir handler de erros local
+    if hasattr(ctx.command, 'on_error'):
+        return
+
+    # Exceção original
+    error = getattr(error, 'original', error)
+
+    # Executa quando o comando não é encontrado. (É ignorado)
+    if isinstance(error, commands.CommandNotFound):
+        return
+    # Executa quando o comando não pode ser utilizado nas mensagens privadas
+    if isinstance(error, commands.NoPrivateMessage):
+        try:
+            await ctx.author.send('Desculpa, mas este comando não pode ser utilizado nas DMs')
+        except Forbidden:
+            pass
+        return
 
 extensions = ['cogs.geral',
               'cogs.torneio',

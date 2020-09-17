@@ -42,6 +42,7 @@ class Geral(commands.Cog):
         # Enviar para o canal de partilhas
         share_channel = ctx.guild.get_channel(756188228448420041)
         await share_channel.send(embed=embed)
+        await ctx.send(f"Acabaste de partilhar **{spotify.title}**! -> <#756188228448420041>")
 
     @partilharmusica.error
     async def command_error(self, ctx, error):

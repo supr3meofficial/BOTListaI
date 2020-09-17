@@ -1,4 +1,4 @@
-import discord
+from discord import Embed
 from discord.ext import commands
 import asyncio
 
@@ -67,7 +67,7 @@ class Torneio(commands.Cog):
 :eye_in_speech_bubble: Lembra-te que estes canais são destinados exclusivamente aos __participantes__ do torneio. Os participantes devem-se registar com informação verdadeira, nomes de registo indevidos irão ser punidos por um moderador.
                 '''
 
-        embed=discord.Embed(title="Como participar no Torneio de Fornite", url="https://listaieseg.wixsite.com/", description=desc, color=0x933db8)
+        embed = Embed(title="Como participar no Torneio de Fornite", url="https://listaieseg.wixsite.com/", description=desc, color=0x933db8)
         await ctx.send(embed=embed) 
 
 def setup(bot):

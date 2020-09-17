@@ -24,7 +24,15 @@ class Geral(commands.Cog):
                 spotify = activity
         # Enviar mensagem de erro se não for descoberta
         if not spotify:
-            return await ctx.send("Precisas de estar a ouvir uma música no Spotify ou não deves ter o Discord e o Spotify conectados",delete_after=5)
+            # Reset ao cooldown visto que o comando não chegou a executar
+            ctx.command.reset_cooldown(ctx)
+            # Enviar mensagem de erro
+            msg="Precisas de estar a ouvir uma música no Spotify ou então não deves ter o Discord e o Spotify conectados"
+            embed = Embed(title="Uh oh!",
+            description=msg,
+            colour=0xbf0000)
+            embed.set_author(icon_url=member.avatar_url, name=member)
+            return await ctx.send(embed=embed, delete_after=15)
 
         share_author = f"{member.name} partilhou a seguinte música:"
         duration = str(spotify.duration).split(".")[0]
@@ -39,10 +47,11 @@ class Geral(commands.Cog):
         embed.add_field(name="Álbum:", value=spotify.album, inline=False)
         embed.add_field(name="Duração:", value=duration, inline=False)
         embed.add_field(name="Link da Faixa:", value=f'https://open.spotify.com/track/{spotify.track_id}', inline=False)
+        embed.set_footer(text=member.name, icon_url=member.avatar_url)
         # Enviar para o canal de partilhas
         share_channel = ctx.guild.get_channel(756188228448420041)
         await share_channel.send(embed=embed)
-        await ctx.send(f"Acabaste de partilhar **{spotify.title}**! -> <#756188228448420041>")
+        await ctx.send(f"Acabaste de partilhar **{spotify.title}** -> <#756188228448420041>")
 
     @partilharmusica.error
     async def command_error(self, ctx, error):

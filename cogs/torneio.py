@@ -69,6 +69,15 @@ class Torneio(commands.Cog):
 
         embed = Embed(title="Como participar no Torneio de Fornite", url="https://listaieseg.wixsite.com/", description=desc, color=0x933db8)
         await ctx.send(embed=embed) 
+    
+    @commands.command()
+    @commands.has_any_role("role do dimitri")#Responsável pelo Torneio Fortnite")
+    async def partida(self, ctx, player_one, player_two, time):
+
+        embed = Embed(title="Próximo Jogo do Torneio", description=f"`{time}` **{player_one}** vs. **{player_two}** ", color=0x933db8)
+        embed.set_thumbnail(url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnintencity.com%2Fwp-content%2Fuploads%2F2018%2F07%2Ffortnite-icon.png&f=1&nofb=1")
+        games_channel = ctx.guild.get_channel(756620516437000295)
+        await games_channel.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Torneio(bot))

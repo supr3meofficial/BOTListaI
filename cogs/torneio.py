@@ -78,6 +78,7 @@ class Torneio(commands.Cog):
         embed.set_thumbnail(url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnintencity.com%2Fwp-content%2Fuploads%2F2018%2F07%2Ffortnite-icon.png&f=1&nofb=1")
         games_channel = ctx.guild.get_channel(756620516437000295)
         await games_channel.send(embed=embed)
+        await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
 
 def setup(bot):
     bot.add_cog(Torneio(bot))

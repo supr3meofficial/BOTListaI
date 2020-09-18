@@ -71,7 +71,7 @@ class Torneio(commands.Cog):
         await ctx.send(embed=embed) 
     
     @commands.command()
-    @commands.has_any_role("role do dimitri")#Responsável pelo Torneio Fortnite")
+    @commands.has_role(756619619464249345) 
     async def partida(self, ctx, player_one, player_two, time):
 
         embed = Embed(title="Próximo Jogo do Torneio", description=f"`{time}` **{player_one}** vs. **{player_two}** ", color=0x933db8)
@@ -79,6 +79,30 @@ class Torneio(commands.Cog):
         games_channel = ctx.guild.get_channel(756620516437000295)
         await games_channel.send(embed=embed)
         await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
+
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        # Tarefa
+        async def sleep_and_add_role(member):
+            # Adiciona um role após ter aguardado 15 minutos 
+            await asyncio.sleep(900) 
+            await member.send("**Obrigado por teres assistido ao torneio!** Como recompensa recebeste o role: `Espetador do Torneio`")
+            await member.add_roles(member.guild.get_role(756626204387442714)) 
+        # Executa se o membro não tiver o role
+        if member.guild.get_role(756626204387442714) not in member.roles:
+            print(member, before, after)
+            # Executa após entrar no canal
+            if (after.channel != None) and (after.channel.id == 756633027685384212):
+                await asyncio.create_task(sleep_and_add_role(member), name=str(member.id)) # Cria tarefa futura com o ID do membro
+            # Executa após sair do canal
+            if (before.channel.id != None) and (before.channel.id == 756633027685384212):
+                for task in asyncio.all_tasks():
+                    # Tenta obter a tarefa com o ID do membro, se a encontrar cancela-a
+                    if task.get_name() == str(member.id):
+                        try:
+                            task.cancel()
+                        except:
+                            pass
 
 def setup(bot):
     bot.add_cog(Torneio(bot))

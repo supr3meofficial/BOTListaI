@@ -42,7 +42,8 @@ async def on_command_error(ctx, error):
 extensions = ['cogs.geral',
               'cogs.torneio',
               'cogs.help',
-              'cogs.etc']
+              'cogs.etc',
+              'cogs.admin']
 
 for ext in extensions:
     bot.load_extension(ext)

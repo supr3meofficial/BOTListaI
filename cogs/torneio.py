@@ -87,9 +87,9 @@ class Torneio(commands.Cog):
             # Adiciona um role após ter aguardado 15 minutos 
             await asyncio.sleep(900) 
             await member.send("**Obrigado por teres assistido ao torneio!** Como recompensa recebeste o role: `Espetador do Torneio`")
-            await member.add_roles(member.guild.get_role(56626204387442714)) 
+            await member.add_roles(member.guild.get_role(756626204387442714)) 
         # Executa se o membro não tiver o role
-        if member.guild.get_role(756618551422484491) not in member.roles:
+        if member.guild.get_role(756626204387442714) not in member.roles:
             print(member, before, after)
             # Executa após entrar no canal
             if (after.channel != None) and (after.channel.id == 756633027685384212):

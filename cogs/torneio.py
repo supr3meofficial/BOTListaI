@@ -90,22 +90,19 @@ class Torneio(commands.Cog):
             await member.add_roles(member.guild.get_role(756626204387442714)) 
         # Executa se o membro não tiver o role
         if member.guild.get_role(756626204387442714) not in member.roles:
-            try:
-                # Executa após entrar no canal
-                if (after.channel != None) and (after.channel.id == 756633027685384212):
-                    await asyncio.create_task(sleep_and_add_role(member), name=str(member.id)) # Cria tarefa futura com o ID do membro
-                # Executa após sair do canal
-                if (before.channel.id != None) and (before.channel.id == 756633027685384212):
-                    for task in asyncio.all_tasks():
-                        # Tenta obter a tarefa com o ID do membro, se a encontrar cancela-a
-                        if task.get_name() == str(member.id):
-                            try:
-                                task.cancel()
-                            except:
-                                pass
-            except AttributeError:
-                # Ignorar
-                pass
+            # Executa após entrar no canal
+            if (member.voice) and (member.voice.channel.id == 756633027685384212):
+                await asyncio.create_task(sleep_and_add_role(member), name=str(member.id)) # Cria tarefa futura com o ID do membro
+            # Executa após sair do canal
+            if (after.channel == None) or (after.channel.id != 756633027685384212):
+                for task in asyncio.all_tasks():
+                    # Tenta obter a tarefa com o ID do membro, se a encontrar cancela-a
+                    if task.get_name() == str(member.id):
+                        try:
+                            task.cancel()
+                        except Exception as e:
+                            print("Exception cancelling asyncio task:", e)
+                            pass
 
 def setup(bot):
     bot.add_cog(Torneio(bot))

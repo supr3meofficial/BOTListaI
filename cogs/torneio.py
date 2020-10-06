@@ -86,13 +86,8 @@ class Torneio(commands.Cog):
         async def sleep_and_add_role(member):
             # Adiciona um role após ter aguardado 15 minutos 
             await asyncio.sleep(900) 
-<<<<<<< HEAD
             await member.send("**Obrigado por teres assistido ao torneio!** Como recompensa recebeste o role: `Espetador do Torneio de Rocket League`")
             await member.add_roles(member.guild.get_role(763056610967945294)) 
-=======
-            await member.send("**Obrigado por estares a assistir o torneio!** Como recompensa recebeste o role: `Espetador do Torneio`")
-            await member.add_roles(member.guild.get_role(756626204387442714)) 
->>>>>>> 05676dbd0a34140a5b92bb03a01453923527cb91
         # Executa se o membro não tiver o role
         if member.guild.get_role(763056610967945294) not in member.roles:
             # Executa após entrar no canal
